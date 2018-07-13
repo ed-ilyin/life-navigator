@@ -3,30 +3,32 @@ module LifeNavigator.State
 open Elmish
 open Elmish.Browser.Navigation
 open Elmish.Browser.UrlParser
-open Fable.Import.Browser
 open Global
 open Types
 
 let pageParser: Parser<Page->Page,Page> =
-  oneOf [
-    map About (s "about")
-    map Home (s "home")
-  ]
+    oneOf [
+        map About (s "about")
+        map Home (s "home")
+        map Home top
+    ]
 
 let urlUpdate (result: Option<Page>) model =
-  match result with
-  | None ->
-    console.error("Error parsing url")
-    model,Navigation.modifyUrl (toHash model.currentPage)
-  | Some page ->
-      { model with currentPage = page }, []
+    match result with
+    | None ->
+        { model with error = Some "Error parsing url" },
+            Navigation.modifyUrl (toHash model.currentPage)
+    | Some page ->
+        { model with currentPage = page }, []
 
 let init result =
   let (home, homeCmd) = Home.State.init()
   let (model, cmd) =
-    urlUpdate result
-      { currentPage = Home
-        home = home }
+    urlUpdate result {
+        currentPage = Home
+        home = home
+        error = None
+    }
   model, Cmd.batch [ cmd
                      Cmd.map HomeMsg homeCmd ]
 

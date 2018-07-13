@@ -8,4 +8,5 @@ type Msg =
 type Model = {
     currentPage: Page
     home: Home.Types.Model
+    error: string option
   }

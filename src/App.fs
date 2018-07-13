@@ -5,9 +5,17 @@ open Elmish.Debug
 open Elmish.HMR
 open Elmish.React
 open Fable.Helpers.React
+open Fable.Helpers.React.Props
 open State
+open Types
 
-let root model dispatch = div [] [ str "привет" ]
+let root model dispatch =
+    div [] [
+        str "привет"
+        Option.map (fun e -> div [ Style [ Color "red" ] ] [ str e ])
+            model.error
+        |> ofOption
+    ]
 
 // App
 Program.mkProgram init update root
