@@ -4,17 +4,19 @@ open Elmish.Browser
 open Elmish.Debug
 open Elmish.HMR
 open Elmish.React
+open Fable.Core
 open Fable.Helpers.React
 open Fable.Helpers.React.Props
 open State
 open Types
 
+JsInterop.importAll "./style.styl"
+
 let root model dispatch =
     ofList [
-        Home.View.root model.home (HomeMsg >> dispatch)
-        Option.map (fun e -> div [ Style [ Color "red" ] ] [ str e ])
-            model.error
+        Option.map (fun e -> div [ Id "error" ] [ str e ]) model.error
         |> ofOption
+        Home.View.root model.home (HomeMsg >> dispatch)
     ]
 
 // App

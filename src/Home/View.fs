@@ -1,24 +1,28 @@
 module Home.View
 
-open Fable.Core
-open Fable.Core.JsInterop
 open Fable.Helpers.React
 open Fable.Helpers.React.Props
 open Types
+open Fable.Import
 
 let root model dispatch =
-  div
-    [ ]
-    [ p
-        [ ClassName "control" ]
-        [ input
-            [ ClassName "input"
-              Type "text"
-              Placeholder "Type your name"
-              DefaultValue model
-              AutoFocus true
-              OnChange (fun ev -> !!ev.target?value |> ChangeStr |> dispatch ) ] ]
-      br [ ]
-      span
-        [ ]
-        [ str (sprintf "Hello %s" model) ] ]
+    div [
+        Id "paper"; TabIndex 1.
+        // OnKeyPress (printfn "%A")
+        OnKeyPress (fun e ->
+            KeyPress {
+                key = e.key
+                ctrl = e.ctrlKey
+                shift = e.shiftKey
+                alt = e.altKey
+                meta = e.metaKey
+            } |> dispatch
+        )
+    ] [
+            div [ Id "c" ] [
+                List.map (fun s -> div [] [ str s ]) model.text
+                |> ofList
+                div [ Id "cursor"; Style [ Top "0px"; Left "7px" ] ]
+                    [ str "b" ]
+            ]
+    ]

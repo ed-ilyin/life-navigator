@@ -32,6 +32,8 @@ let init result =
 
 let update msg model =
     match msg with
+    | HomeMsg (Home.Types.Failure x) ->
+        { model with error = Some x.Message}, Cmd.none
     | HomeMsg msg ->
         let (home, homeCmd) = Home.State.update msg model.home
         { model with home = home }, Cmd.map HomeMsg homeCmd
