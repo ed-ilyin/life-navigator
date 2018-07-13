@@ -21,7 +21,10 @@ let root model dispatch =
     ] [
         div [ Id "text" ] [
             List.map (fun s -> div [] [ str s ]) model.text |> ofList
-            div [ Id "cursor"; Style [ Top "0px"; Left "7px" ] ]
-                [ str "b" ]
+            div [
+                Id "cursor"
+                Style
+                    [ Top model.cursorTopPx; Left model.cursorLeftPx ]
+            ] [ str model.cursorChar ]
         ]
     ]

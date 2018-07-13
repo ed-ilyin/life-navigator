@@ -3,6 +3,9 @@ module Home.Types
 type Model = {
     cursorTop: int
     cursorLeft: int
+    cursorTopPx: string
+    cursorLeftPx: string
+    cursorChar: string
     text: string list
 }
 type KeyPress = {
