@@ -11,7 +11,7 @@ let toHash page =
   | About -> "#about"
   | Home -> "#home"
 
-let canvas =document.createElement "canvas"
+let canvas = document.createElement "canvas"
 let canvasContext = canvas?getContext "2d"
 
 let textWidth (text: string) : float =
