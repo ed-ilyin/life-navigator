@@ -1,4 +1,4 @@
-module LifeNavigator.Types
+module App.Types
 
 open Global
 

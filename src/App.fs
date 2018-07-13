@@ -1,4 +1,4 @@
-module LifeNavigator.View
+module App.View
 open Elmish
 open Elmish.Browser
 open Elmish.Debug
@@ -10,8 +10,8 @@ open State
 open Types
 
 let root model dispatch =
-    div [] [
-        str "привет"
+    ofList [
+        Home.View.root model.home (HomeMsg >> dispatch)
         Option.map (fun e -> div [ Style [ Color "red" ] ] [ str e ])
             model.error
         |> ofOption
