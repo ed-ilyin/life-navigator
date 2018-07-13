@@ -1,35 +1,22 @@
-module LifeNavigator.App
+module LifeNavigator.View
+open Elmish
+open Elmish.Browser
+open Elmish.Debug
+open Elmish.HMR
+open Elmish.React
+open Fable.Helpers.React
+open State
 
-open Fable.Core
-open Fable.Core.JsInterop
-open Fable.Import
+let root model dispatch = div [] [ str "привет" ]
 
-let init() =
-    let canvas = Browser.document.getElementsByTagName_canvas().[0]
-    canvas.width <- 1000.
-    canvas.height <- 800.
-    let ctx = canvas.getContext_2d()
-    // The (!^) operator checks and casts a value to an Erased Union type
-    // See http://fable.io/docs/interacting.html#Erase-attribute
-    ctx.fillStyle <- !^"rgb(200,0,0)"
-    ctx.fillRect (10., 10., 55., 50.)
-    ctx.fillStyle <- !^"rgba(0, 0, 200, 0.5)"
-    ctx.fillRect (30., 30., 55., 50.)
-
-init()
-
-// open Elmish.React
-// open Elmish.Debug
-// open Elmish.HMR
-
-// // App
-// Program.mkProgram init update root
-// |> Program.toNavigable (parseHash pageParser) urlUpdate
-// //-:cnd:noEmit
-// #if DEBUG
-// |> Program.withDebugger
-// |> Program.withHMR
-// #endif
-// //+:cnd:noEmit
-// |> Program.withReact "elmish-app"
-// |> Program.run
+// App
+Program.mkProgram init update root
+|> Navigation.Program.toNavigable (UrlParser.parseHash pageParser) urlUpdate
+//-:cnd:noEmit
+#if DEBUG
+|> Program.withDebugger
+|> Program.withHMR
+#endif
+//+:cnd:noEmit
+|> Program.withReact "app"
+|> Program.run
