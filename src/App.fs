@@ -1,4 +1,4 @@
-module Life.Navigator
+module LifeNavigator.App
 
 open Fable.Core
 open Fable.Core.JsInterop
@@ -17,3 +17,19 @@ let init() =
     ctx.fillRect (30., 30., 55., 50.)
 
 init()
+
+// open Elmish.React
+// open Elmish.Debug
+// open Elmish.HMR
+
+// // App
+// Program.mkProgram init update root
+// |> Program.toNavigable (parseHash pageParser) urlUpdate
+// //-:cnd:noEmit
+// #if DEBUG
+// |> Program.withDebugger
+// |> Program.withHMR
+// #endif
+// //+:cnd:noEmit
+// |> Program.withReact "elmish-app"
+// |> Program.run

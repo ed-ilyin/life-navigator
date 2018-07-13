@@ -1,7 +1,7 @@
 {
   "private": true,
   "fable": {
-    "entry": "src/Life.Navigator.fsproj"
+    "entry": "src/LifeNavigator.fsproj"
   },
   "scripts": {
     "postinstall": "dotnet restore",

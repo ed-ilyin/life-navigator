@@ -1,7 +1,4 @@
-# Fable Simple Template
-
-This template can be used to generate a simple web app with [Fable](http://fable.io/).
-You can find more templates by searching `Fable.Template` packages in [Nuget](https://www.nuget.org).
+# Life Navigator
 
 ## Requirements
 
@@ -13,16 +10,6 @@ You can find more templates by searching `Fable.Template` packages in [Nuget](ht
 ## Editor
 
 The project can be used by editors compatible with the new .fsproj format, like VS Code + [Ionide](http://ionide.io/), Emacs with [fsharp-mode](https://github.com/fsharp/emacs-fsharp-mode) or [Rider](https://www.jetbrains.com/rider/). **Visual Studio for Mac** is also compatible but in the current version the package auto-restore function conflicts with Paket so you need to disable it: `Preferences > Nuget > General`.
-
-## Installing the template
-
-In a terminal, run `dotnet new -i Fable.Template` to install or update the template to the latest version.
-
-## Creating a new project with the template
-
-In a terminal, run `dotnet new fable` to create a project in the current directory. Type `dotnet new fable -n MyApp` instead to create a subfolder named `MyApp` and put the new project there.
-
-> The project will have the name of the directory. You may get some issues if the directory name contains some special characters like hyphens
 
 ## Building and running the app
 
@@ -80,7 +67,3 @@ Webpack configuration files are in the `tools` directory. If you need to edit th
 ### F# source files
 
 The template only contains two F# source files: the project (.fsproj) and a source file (.fs) in `src` folder.
-
-## Where to go from here
-
-Check more [Fable samples](https://github.com/fable-compiler/samples-browser), use another template like `Fable.Template.Elmish.React` or `SAFE.Template`, and check the [awesome-fable](https://github.com/kunjee17/awesome-fable#-awesome-fable) for a curated list of resources provided by the community.
