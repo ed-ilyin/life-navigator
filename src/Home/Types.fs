@@ -1,21 +1,19 @@
 module Home.Types
 
-type Model = {
-    cursorTop: int
-    cursorLeft: int
-    cursorTopPx: string
-    cursorLeftPx: string
-    cursorChar: string
-    text: string list
+type NodeId = string
+type NodeLabel = string
+
+type Node = {
+    name: string
+    note: string
+    fold: bool
+    children: NodeId list
 }
-type KeyPress = {
-    key: string
-    ctrl: bool
-    shift: bool
-    alt: bool
-    meta: bool
+
+type Model = {
+    nodes: Map<NodeId,Node>
+    focus: NodeId
 }
 
 type Msg =
     | Failure of System.Exception
-    | KeyPress of KeyPress

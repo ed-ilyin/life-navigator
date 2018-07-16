@@ -3,68 +3,26 @@ module Home.State
 open Elmish
 open Types
 
-let init () : Model * Cmd<Msg> =
-    {   cursorTop = 0
-        cursorLeft = 0
-        cursorTopPx = "0px"
-        cursorLeftPx = "0px"
-        cursorChar = "a"
-        text =
-            [   "abba babba"
-                "piggy miggy"
-            ]
-    }, Cmd.none
+let node name note fold children = {
+    name = name
+    note = note
+    fold = fold
+    children = children
+}
 
-let cursorChar model =
-    List.tryItem model.cursorTop model.text
-    |> Option.map (fun l ->
-        try
-        { model with
-            cursorLeftPx =
-                Seq.take model.cursorLeft l
-                |> Array.ofSeq
-                |> System.String
-                |> Global.textWidth
-                |> sprintf "%fpx"
-            cursorChar =
-                match
-                    List.tryItem model.cursorTop model.text
-                    |> Option.bind (Seq.tryItem model.cursorLeft)
-                    |> Option.defaultValue '!'
-                    with ' ' -> "\u00a0" | ch -> string ch
-        }
-        with _ -> model
-    )
-    |> Option.defaultValue model
+let init () : Model * Cmd<Msg> =
+    {   nodes =
+            Map.ofList [
+                "ed", node "Ed Ilyin" "entrepreneur" true [ "ed-root" ]
+                "ed-root", node "Home" "beginning" true [ "ed-tags" ]
+                "ed-tags", node "Tags" "place for all tags" true
+                    [ "ed-tag1"; "ed-tag2" ]
+                "ed-tag1", node "Tag One" "one of the tags" true []
+                "ed-tag2", node "Tag Two with very very very long description." "second of the tags" true []
+            ]
+        focus = "ed"
+    }, Cmd.none
 
 let update msg model : Model * Cmd<Msg> =
     match msg with
     | Failure _ -> model, Cmd.none
-    | KeyPress keyPress ->
-        match keyPress with
-        | { key = "h" } ->
-            let c = model.cursorLeft - 1
-            { model with
-                cursorLeft = c
-                // cursorLeftPx = c * 8 |> sprintf "%ipx"
-            } |> cursorChar
-        | { key = "j" } ->
-            let c = model.cursorTop + 1
-            { model with
-                cursorTop = c
-                cursorTopPx= c * 18 |> sprintf "%ipx"
-            } |> cursorChar
-        | { key = "k" } ->
-            let c = model.cursorTop - 1
-            { model with
-                cursorTop = c
-                cursorTopPx= c * 18 |> sprintf "%ipx"
-            } |> cursorChar
-        | { key = "l" } ->
-            let c = model.cursorLeft + 1
-            { model with
-                cursorLeft = c
-                // cursorLeftPx = c * 8 |> sprintf "%ipx"
-            } |> cursorChar
-        | _ -> model
-        , string keyPress |> exn |> Failure |> Cmd.ofMsg
