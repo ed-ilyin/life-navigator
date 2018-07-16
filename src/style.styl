@@ -1,9 +1,9 @@
-theme = 360 / 5 * 3
+theme = 360 / 5 * 2
 saturation = 10%
 darkest = hsl(theme, saturation, 15%)
 dark = hsl(theme, saturation, 20%)
-light = hsl(theme, 100%, 90%)
-lightest = hsl(theme, 100%, 95%)
+light = hsl(theme, 50%, 90%)
+lightest = hsl(theme, 50%, 95%)
 paperspace = 16px
 space = 4px
 
@@ -26,7 +26,7 @@ div#app
 div#paper
     background-color dark
     color lightest
-    padding paperspace + 8px paperspace + 8px ((paperspace + 18px))
+    padding paperspace + 8px paperspace + 8px (((paperspace + 18px)))
     box-shadow 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.4)
     text-align initial
     max-width 800px
@@ -47,15 +47,16 @@ div.bullet.full
     background-color light
     border-radius 50%
     border solid gray 8px
-    margin space space + 4px space 0
+    margin 0px space + 4px space 0
 
 .name
     align-self flex-start
-    margin 7px 0px 0px
+    margin 3px 0px 0px
     outline initial
 
 .main.name
     margin 0px
+
 .note
     color gray
     outline initial
